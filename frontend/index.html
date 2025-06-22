@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Watermark a Video!</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h2>Watermark a Video!</h2>
+
+        <div>
+            <p>
+                On this website, you can watermark a video! You can either select a video and an image from
+                your file system, or you can provide a shared access signature (SAS) link to files on your
+                Microsoft blob storage. Note that in case both a file path and a SAS link are provided, the
+                SAS link will be used.
+            </p>
+        </div>
+
+        <h3> Option 1: </h3>
+        <div class="input-group">
+            <label for="video_path">Select a video:</label>
+            <input type="file" id="video_path" />
+        </div>
+
+        <div class="input-group">
+            <label for="image_path">Select a watermark:</label>
+            <input type="file" id="image_path" />
+        </div>
+
+        <h3> Option 2: </h3>
+        <div class="input-group">
+            <label for="video_sas">Provide a SAS URL for a video:</label>
+            <input type="text" id="video_sas" />
+        </div>
+
+        <div class="input-group">
+            <label for="image_sas">Provide a SAS URL for a watermark</label>
+            <input type="text" id="image_sas" />
+        </div>
+
+        <div class="input-group">
+            <button id="startButton">Start</button>
+        </div>
+
+        <div class="input-group">
+            <label for="progress">Progress:</label>
+            <progress id="progressBar" value="0" max="100"></progress>
+        </div>
+
+        <div class="input-group">
+            <button id="downloadVideo" style="display: none;">Download Watermarked Video</button>
+        </div>
+        <div class="input-group">
+            <button id="downloadThumbnail" style="display: none;">Download Thumbnail</button>
+        </div>
+
+
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

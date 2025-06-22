@@ -1,0 +1,6 @@
+Voor het testen moet je het volgende doen:
+
+1. activeer virtual environment 
+2. azurite --silent --location ./azurite --debug ./azurite/debug.log
+en dan in een nieuw terminal:
+3. swa start ./frontend --api-location ./backend --port 4280
