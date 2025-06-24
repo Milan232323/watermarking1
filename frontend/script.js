@@ -39,8 +39,9 @@ async function uploadFile(file) {
         return sasUrl;
 
     } catch (error) {
-        console.log(`Error: ${error.message}`);
-    }
+    console.error(`UploadFile error: ${error.message}`);
+    throw error; // this ensures Promise.all fails if one upload fails
+}
 }
 
 
