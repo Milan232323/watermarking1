@@ -30,19 +30,23 @@ async function uploadFile(file) {
             body: file
         });
 
+        console.log("Upload response:", uploadRes.status, uploadRes.statusText);
+
         if (uploadRes.status === 201) {
             console.log('Upload successful!');
         } else {
-            console.log(`Upload failed with status ${uploadRes.status}: ${uploadRes.statusText}`);
+            const errText = await uploadRes.text();
+            throw new Error(`Upload failed with status ${uploadRes.status}: ${errText}`);
         }
 
         return sasUrl;
 
     } catch (error) {
-    console.error(`UploadFile error: ${error.message}`);
-    throw error; // this ensures Promise.all fails if one upload fails
+        console.error(`uploadFile() error:`, error.message);
+        throw error; // ensures it fails visibly
+    }
 }
-}
+
 
 
 
