@@ -1,4 +1,4 @@
-const URL_HOST = 'http://localhost:7071/api/';
+const URL_HOST = 'https://proud-flower-02821d003.2.azurestaticapps.net/api/';
 const URL_GET_UPLOAD_URL = URL_HOST + 'get-upload-url';
 const URL_GET_DOWNLOAD_URL = URL_HOST + 'get-download-url';
 const URL_MAIN_PROCESS = URL_HOST + 'main_process_func';
