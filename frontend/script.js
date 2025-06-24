@@ -73,6 +73,12 @@ async function downloadFile(jobId, type) {
 
 
 async function mainProcess(jobId, videoSAS, imageSAS) {
+    console.log("Calling main_process_func with:", {
+        job_id: jobId,
+        video_sas: videoSAS,
+        image_sas: imageSAS
+    });
+
     try {
         const response = await fetch(URL_MAIN_PROCESS, {
             method: 'POST',
@@ -171,42 +177,43 @@ document.getElementById('startButton').addEventListener('click', () => {
 
     Promise.all([videoUploadPromise, imageUploadPromise])
         .then(([resolvedVideoSAS, resolvedImageSAS]) => {
-            videoSAS = resolvedVideoSAS;
-            imageSAS = resolvedImageSAS;
+        if (!resolvedVideoSAS || !resolvedImageSAS) {
+            alert("Upload failed — missing video or image SAS URL.");
+            console.error("Upload returned:", resolvedVideoSAS, resolvedImageSAS);
+            return;
+        }
 
-            // Continue logic here
-            console.log("Uploads complete:", videoSAS, imageSAS);
+        videoSAS = resolvedVideoSAS;
+        imageSAS = resolvedImageSAS;
 
-    // Now we can start the process with a unique ID.
-            const jobId = crypto.randomUUID();  // Generate a unique ID
-            mainProcess(jobId, videoSAS, imageSAS);
+        console.log("Uploads complete:", videoSAS, imageSAS);
 
+        const jobId = crypto.randomUUID();  // Generate a unique ID
+        console.log("Starting job with ID:", jobId);
 
-            // This updated the progress bar
-            const pollInterval = setInterval(async () => {
-                const status = await checkProcessingStatus(jobId);
-                progressBar.value = status.progress_value;
+        mainProcess(jobId, videoSAS, imageSAS);
 
-                if (status.done) {
-                    clearInterval(pollInterval);
-                    alert("Processing complete! You can now download your files.");
+        const pollInterval = setInterval(async () => {
+            const status = await checkProcessingStatus(jobId);
+            progressBar.value = status.progress_value;
 
-                    const downloadVideoBtn = document.getElementById('downloadVideo');
-                    const downloadThumbnailBtn = document.getElementById('downloadThumbnail');
+            if (status.done) {
+                clearInterval(pollInterval);
+                alert("Processing complete! You can now download your files.");
 
-                    downloadVideoBtn.onclick = () => downloadFile(jobId, 'output_video');
-                    downloadThumbnailBtn.onclick = () => downloadFile(jobId, 'output_thumbnail');
+                const downloadVideoBtn = document.getElementById('downloadVideo');
+                const downloadThumbnailBtn = document.getElementById('downloadThumbnail');
 
-                    downloadVideoBtn.style.display = 'inline';
-                    downloadThumbnailBtn.style.display = 'inline';
+                downloadVideoBtn.onclick = () => downloadFile(jobId, 'output_video');
+                downloadThumbnailBtn.onclick = () => downloadFile(jobId, 'output_thumbnail');
 
-                    cleanup(jobId) // asynchronous cleanup of internal files
-                }
-            }, 500); // Poll twice per second
+                downloadVideoBtn.style.display = 'inline';
+                downloadThumbnailBtn.style.display = 'inline';
 
-        })
-
-
+                cleanup(jobId);
+            }
+        }, 500);
+    })
 
         .catch(error => {
             console.error("Upload failed:", error);
