@@ -9,43 +9,35 @@
 
 <body>
     <div class="container">
-        <h1>🎬 Watermark a Video!</h1>
-        <p class="description">
-            Upload your video and watermark image, or provide SAS URLs from Azure Blob Storage. If both are provided, SAS URLs will take priority.
+        <h2>Watermark a Video</h2>
+        <p class="instructions">
+            Upload a video and watermark image, or enter SAS URLs. If both are given, the SAS URL is used.
         </p>
 
-        <div class="card">
-            <h2>Option 1: Upload Files</h2>
-            <div class="input-group">
-                <label for="video_path">Select a video:</label>
-                <input type="file" id="video_path" />
-            </div>
-            <div class="input-group">
-                <label for="image_path">Select a watermark:</label>
-                <input type="file" id="image_path" />
-            </div>
-        </div>
+        <div class="inputs">
+            <h3>Option 1:</h3>
+            <label for="video_path">Video:</label>
+            <input type="file" id="video_path" />
 
-        <div class="card">
-            <h2>Option 2: Provide SAS URLs</h2>
-            <div class="input-group">
-                <label for="video_sas">Video SAS URL:</label>
-                <input type="text" id="video_sas" placeholder="https://..." />
-            </div>
-            <div class="input-group">
-                <label for="image_sas">Watermark SAS URL:</label>
-                <input type="text" id="image_sas" placeholder="https://..." />
-            </div>
-        </div>
+            <label for="image_path">Watermark:</label>
+            <input type="file" id="image_path" />
 
-        <div class="actions">
-            <button id="startButton">▶ Start Processing</button>
-            <div class="progress-container">
-                <label for="progressBar">Progress:</label>
-                <progress id="progressBar" value="0" max="100"></progress>
-            </div>
-            <button id="downloadVideo" style="display: none;">⬇ Download Video</button>
-            <button id="downloadThumbnail" style="display: none;">🖼 Download Thumbnail</button>
+            <h3>Option 2:</h3>
+            <label for="video_sas">Video SAS URL:</label>
+            <input type="text" id="video_sas" />
+
+            <label for="image_sas">Watermark SAS URL:</label>
+            <input type="text" id="image_sas" />
+
+            <button id="startButton">Start</button>
+
+            <label for="progressBar">Progress:</label>
+            <progress id="progressBar" value="0" max="100"></progress>
+
+            <p id="statusText">Status: Not started</p>
+
+            <button id="downloadVideo" style="display: none;">Download Video</button>
+            <button id="downloadThumbnail" style="display: none;">Download Thumbnail</button>
         </div>
     </div>
 
