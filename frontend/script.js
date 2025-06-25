@@ -199,25 +199,27 @@ document.getElementById('startButton').addEventListener('click', () => {
         mainProcess(jobId, videoSAS, imageSAS);
 
         const pollInterval = setInterval(async () => {
-            const status = await checkProcessingStatus(jobId);
-            progressBar.value = status.progress_value;
+        const status = await checkProcessingStatus(jobId);
+        progressBar.value = status.progress_value;
+        document.getElementById("statusMessage").textContent = `Status: ${status.status_message || 'Unknown'}`;
 
-            if (status.done) {
-                clearInterval(pollInterval);
-                alert("Processing complete! You can now download your files.");
+        if (status.done) {
+            clearInterval(pollInterval);
+            alert("Processing complete! You can now download your files.");
 
-                const downloadVideoBtn = document.getElementById('downloadVideo');
-                const downloadThumbnailBtn = document.getElementById('downloadThumbnail');
+            const downloadVideoBtn = document.getElementById('downloadVideo');
+            const downloadThumbnailBtn = document.getElementById('downloadThumbnail');
 
-                downloadVideoBtn.onclick = () => downloadFile(jobId, 'output_video');
-                downloadThumbnailBtn.onclick = () => downloadFile(jobId, 'output_thumbnail');
+            downloadVideoBtn.onclick = () => downloadFile(jobId, 'output_video');
+            downloadThumbnailBtn.onclick = () => downloadFile(jobId, 'output_thumbnail');
 
-                downloadVideoBtn.style.display = 'inline';
-                downloadThumbnailBtn.style.display = 'inline';
+            downloadVideoBtn.style.display = 'inline';
+            downloadThumbnailBtn.style.display = 'inline';
 
-                cleanup(jobId);
-            }
+            cleanup(jobId);
+        }
         }, 500);
+
     })
 
         .catch(error => {
