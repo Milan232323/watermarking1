@@ -160,8 +160,9 @@ document.getElementById('startButton').addEventListener('click', () => {
 
     const progressBar = document.getElementById('progressBar');
     progressBar.value = 0;
+    
+    document.getElementById('statusValue').textContent = `Status: Uploading video and watermark`;
 
-    statusEl.textContent = `Status: Uploading video and watermark`;
 
     // Validate input
     const videoPresent = videoFile || videoSAS
@@ -187,7 +188,7 @@ document.getElementById('startButton').addEventListener('click', () => {
     Promise.all([videoUploadPromise, imageUploadPromise])
         .then(([resolvedVideoSAS, resolvedImageSAS]) => {
 
-        statusEl.textContent = `Status: Video and watermark uploaded`;
+        statusEl.textContent = 'Status: Video and watermark uploaded';
         if (!resolvedVideoSAS || !resolvedImageSAS) {
             alert("Upload failed — missing video or image SAS URL.");
             console.error("Upload returned:", resolvedVideoSAS, resolvedImageSAS);
@@ -207,7 +208,7 @@ document.getElementById('startButton').addEventListener('click', () => {
         const pollInterval = setInterval(async () => {
         const status = await checkProcessingStatus(jobId);
         progressBar.value = status.progress_value;
-        const statusEl = document.getElementById("statusMessage");
+        const statusEl = document.getElementById("statusValue");
         if (statusEl) {
             statusEl.textContent = `Status: ${status.status_message || 'Unknown'}`;
         }
