@@ -209,7 +209,7 @@ document.getElementById('startButton').addEventListener('click', () => {
         progressBar.value = status.progress_value;
         const statusEl = document.getElementById("statusValue");
         if (statusEl) {
-            statusEl.textContent = `${status.status_message || 'Unknown'}`;
+            statusEl.textContent = `${status.status_message || 'Uploading video and watermark '}`;
         }
 
         if (status.done) {
@@ -231,8 +231,8 @@ document.getElementById('startButton').addEventListener('click', () => {
 
     })
 
-        .catch(error => {
-            console.error("Upload failed:", error);
+        .catch(err => {
+        console.error("Upload failed:", err);
+        document.getElementById('statusValue').innerText = 'Upload failed';
         });
-
 });
