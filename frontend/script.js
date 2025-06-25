@@ -201,7 +201,10 @@ document.getElementById('startButton').addEventListener('click', () => {
         const pollInterval = setInterval(async () => {
         const status = await checkProcessingStatus(jobId);
         progressBar.value = status.progress_value;
-        document.getElementById("statusMessage").textContent = `Status: ${status.status_message || 'Unknown'}`;
+        const statusEl = document.getElementById("statusMessage");
+        if (statusEl) {
+            statusEl.textContent = `Status: ${status.status_message || 'Unknown'}`;
+        }
 
         if (status.done) {
             clearInterval(pollInterval);
