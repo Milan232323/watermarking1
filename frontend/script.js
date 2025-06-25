@@ -124,6 +124,8 @@ async function checkProcessingStatus(jobId) {
 
         const data = await response.json();
 
+        document.getElementById('statusValue').textContent = data.status_message;
+
         return data;
 
     } catch (err) {
@@ -230,6 +232,3 @@ document.getElementById('startButton').addEventListener('click', () => {
         });
 
 });
-
-
-
