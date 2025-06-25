@@ -9,65 +9,48 @@
 
 <body>
     <div class="container">
-        <h2>Watermark a Video!</h2>
+        <h1>🎬 Watermark a Video!</h1>
+        <p class="description">
+            Upload your video and watermark image, or provide SAS URLs from Azure Blob Storage. If both are provided, SAS URLs will take priority.
+        </p>
 
-        <div>
-            <p>
-                On this website, you can watermark a video! You can either select a video and an image from
-                your file system, or you can provide a shared access signature (SAS) link to files on your
-                Microsoft blob storage. Note that in case both a file path and a SAS link are provided, the
-                SAS link will be used.
-            </p>
+        <div class="card">
+            <h2>Option 1: Upload Files</h2>
+            <div class="input-group">
+                <label for="video_path">Select a video:</label>
+                <input type="file" id="video_path" />
+            </div>
+            <div class="input-group">
+                <label for="image_path">Select a watermark:</label>
+                <input type="file" id="image_path" />
+            </div>
         </div>
 
-        <h3> Option 1: </h3>
-        <div class="input-group">
-            <label for="video_path">Select a video:</label>
-            <input type="file" id="video_path" />
+        <div class="card">
+            <h2>Option 2: Provide SAS URLs</h2>
+            <div class="input-group">
+                <label for="video_sas">Video SAS URL:</label>
+                <input type="text" id="video_sas" placeholder="https://..." />
+            </div>
+            <div class="input-group">
+                <label for="image_sas">Watermark SAS URL:</label>
+                <input type="text" id="image_sas" placeholder="https://..." />
+            </div>
         </div>
 
-        <div class="input-group">
-            <label for="image_path">Select a watermark:</label>
-            <input type="file" id="image_path" />
+        <div class="actions">
+            <button id="startButton">▶ Start Processing</button>
+            <div class="progress-container">
+                <label for="progressBar">Progress:</label>
+                <progress id="progressBar" value="0" max="100"></progress>
+            </div>
+            <button id="downloadVideo" style="display: none;">⬇ Download Video</button>
+            <button id="downloadThumbnail" style="display: none;">🖼 Download Thumbnail</button>
         </div>
-
-        <h3> Option 2: </h3>
-        <div class="input-group">
-            <label for="video_sas">Provide a SAS URL for a video:</label>
-            <input type="text" id="video_sas" />
-        </div>
-
-        <div class="input-group">
-            <label for="image_sas">Provide a SAS URL for a watermark</label>
-            <input type="text" id="image_sas" />
-        </div>
-
-        <div class="input-group">
-            <button id="startButton">Start</button>
-        </div>
-
-        <div class="input-group">
-            <label for="progress">Progress:</label>
-            <progress id="progressBar" value="0" max="100"></progress>
-        </div>
-
-        <div class="input-group">
-            <span id="statusMessage">Status: Waiting to start...</span>
-        </div>
-
-
-        <div class="input-group">
-            <button id="downloadVideo" style="display: none;">Download Watermarked Video</button>
-        </div>
-        <div class="input-group">
-            <button id="downloadThumbnail" style="display: none;">Download Thumbnail</button>
-        </div>
-
-
-
     </div>
 
     <script src="script.js"></script>
 </body>
+
 
 </html>

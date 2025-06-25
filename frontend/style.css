@@ -1,16 +1,36 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    color: #333;
 }
 
 .container {
-    max-width: 500px;
-    margin: auto;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #1e88e5;
+}
+
+.description {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: #f1faff;
+    border: 1px solid #bbdefb;
+    border-radius: 12px;
     padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .input-group {
@@ -19,21 +39,56 @@ body {
 
 label {
     display: block;
-    margin-bottom: 5px;
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 input[type="file"],
 input[type="text"] {
     width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #1565c0;
+}
+
+.progress-container {
+    margin: 20px 0;
 }
 
 progress {
     width: 100%;
     height: 20px;
+    border-radius: 8px;
+    appearance: none;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+progress::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 8px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #42a5f5;
+    border-radius: 8px;
+}
+
+.actions {
+    text-align: center;
 }
