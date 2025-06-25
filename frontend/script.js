@@ -161,7 +161,7 @@ document.getElementById('startButton').addEventListener('click', () => {
     const progressBar = document.getElementById('progressBar');
     progressBar.value = 0;
     
-    document.getElementById('statusValue').textContent = `Status: Uploading video and watermark`;
+    document.getElementById('statusValue').textContent = 'Uploading video and watermark';
 
 
     // Validate input
@@ -188,7 +188,6 @@ document.getElementById('startButton').addEventListener('click', () => {
     Promise.all([videoUploadPromise, imageUploadPromise])
         .then(([resolvedVideoSAS, resolvedImageSAS]) => {
 
-        statusEl.textContent = 'Status: Video and watermark uploaded';
         if (!resolvedVideoSAS || !resolvedImageSAS) {
             alert("Upload failed — missing video or image SAS URL.");
             console.error("Upload returned:", resolvedVideoSAS, resolvedImageSAS);
