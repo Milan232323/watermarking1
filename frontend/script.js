@@ -209,7 +209,7 @@ document.getElementById('startButton').addEventListener('click', () => {
         progressBar.value = status.progress_value;
         const statusEl = document.getElementById("statusValue");
         if (statusEl) {
-            statusEl.textContent = `Status: ${status.status_message || 'Unknown'}`;
+            statusEl.textContent = `${status.status_message || 'Unknown'}`;
         }
 
         if (status.done) {
